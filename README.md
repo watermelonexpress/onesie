@@ -42,7 +42,7 @@ gem_push=no rake release
 
 ```bash
 gem push --key github \
---host https://rubygems.pkg.github.com/timlkelly \
+--host https://rubygems.pkg.github.com/watermelonexpress \
 pkg/onesie-0.2.0.gem
 ```
 
