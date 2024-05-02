@@ -7,7 +7,7 @@ module Onesie
       manual_task enabled: false
 
       def run
-        <%= run_contents %>
+<%= run_contents.chomp.indent(8) %>
       end
     end
   end
