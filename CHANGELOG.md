@@ -1,4 +1,5 @@
 # Changelog
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
@@ -7,17 +8,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+
 - Added `.DS_Store` to `.gitignore`
-- Added support for Rails version 5.2.8.1 and lower
+- Added support for Rails > 5
 
 ### Changed
+
+- Switch `colorize` gem for `rainbow`
+- Upgrade project to Ruby 3.0.6
 
 ### Deprecated
 
 ### Removed
+
 - Removed `bpdocs.yml`
+- Removed support for Ruby 2.6.x
+- Removed debugging dependencies
+- Removed support for Rails 4.x
 
 ### Fixed
+
 - Fix documentation formatting for MKDocs
 
 ### Security
@@ -25,25 +35,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.2.0] - 2022-02-01
 
 ### Added
+
 - Add ability to rerun Tasks
 - Add `onesie:rerun` rake task
 
 ### Changed
+
 - Updated documentation of manual tasks
 - Add documentation examples
 - Added Onesie task name to "Done" message for logging
 
 ### Fixed
+
 - Fix documentation typos
 - Fix the Runner's error output to reference the correct task
 
 ## [0.1.1] - 2022-01-06
 
 ### Removed
+
 - Removed unique index between `name` and `version` for PostgreSQL BDR
   compliance
 
 ### Fixed
+
 - Add comment on `onesie_tasks.id` column
 - Add uniqueness validation to `TaskRecord`
 - Make migration reversible; Specified `up` and `down` actions
