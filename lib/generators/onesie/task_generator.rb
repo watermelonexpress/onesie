@@ -27,8 +27,7 @@ module Onesie
       end
 
       def read_template
-        $stderr.puts task_template
-        task_template ? File.read(custom_template_path) : nil
+        task_template ? Onesie::TemplateReader.read_template(custom_template_path) : nil
       end
 
       def custom_template_path

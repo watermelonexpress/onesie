@@ -14,7 +14,7 @@ RSpec.describe Onesie::Generators::TemplateGenerator, type: :generator do
 
   it 'creates a new template file' do
     path = 'tmp/onesie/templates/example_template.rb'
-    expect(File.exists?(path)).to eq(true)
+    expect(File.exist?(path)).to be(true)
 
     contents = File.read(path)
 
