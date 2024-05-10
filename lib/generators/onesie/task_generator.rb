@@ -31,7 +31,7 @@ module Onesie
       end
 
       def custom_template_path
-        Rails.root.join('onesie', 'templates', "#{task_template}.rb")
+        Rails.root.join('onesie', 'templates', "#{task_template.underscore}.rb")
       end
 
       def task_priority

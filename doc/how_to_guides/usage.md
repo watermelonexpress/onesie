@@ -39,7 +39,7 @@ bundle exec rails generate onesie:task MyTask high # creates a high priority tas
 
 #### API
 ```bash
-rake onesie:new[name,priority]         # Generates a new Onesie Task
+rake onesie:new[name,priority,template]         # Generates a new Onesie Task
 ```
 
 #### Examples
@@ -47,6 +47,7 @@ rake onesie:new[name,priority]         # Generates a new Onesie Task
 ```bash
 bundle exec rake onesie:new['MyTask']        # creates a normal priority task
 bundle exec rake onesie:new['MyTask','high'] # creates a high priority task
+bundle exec rake onesie:new['MyTask','high','SampleTemplate'] # creates a high priority task using 'SampleTemplate'
 ```
 
 ## Write your Onesie Task

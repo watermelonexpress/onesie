@@ -8,8 +8,8 @@ namespace :onesie do
 
   # bundle exec rake onesie:new['MyTask']
   # bundle exec rake onesie:new['MyTask','high']
-  # bundle exec rake onesie:new['MyTask','high','example_template_name']
-  # bundle exec rake onesie:new['MyTask',,'example_template_name']
+  # bundle exec rake onesie:new['MyTask','high','ExampleTemplateName']
+  # bundle exec rake onesie:new['MyTask',,'ExampleTemplateName']
   desc 'Generates a new Onesie Task'
   task :new, [:name, :priority, :template] do |_t, args|
     name = args.fetch(:name)
