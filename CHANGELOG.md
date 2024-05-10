@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Added `.DS_Store` to `.gitignore`
 - Added support for Rails > 5
+- Added support for custom templates
 
 ### Changed
 
