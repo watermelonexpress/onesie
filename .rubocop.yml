@@ -29,10 +29,10 @@ Lint:
 
 Metrics/BlockLength:
   Exclude:
-    - '**/*.gemspec'
-    - '**/*.rake'
-    - 'Rakefile'
-    - 'spec/**/*.rb'
+    - "**/*.gemspec"
+    - "**/*.rake"
+    - "Rakefile"
+    - "spec/**/*.rb"
 
 RSpec:
   Language:
@@ -48,4 +48,8 @@ RSpec/NestedGroups:
 
 Style/BlockDelimiters:
   Exclude:
-    - 'spec/**/*'
+    - "spec/**/*"
+
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - lib/generators/onesie/templates/template.rb

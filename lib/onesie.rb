@@ -11,6 +11,7 @@ require_relative 'onesie/task'
 require_relative 'onesie/task_proxy'
 require_relative 'onesie/task_record'
 require_relative 'onesie/task_wrapper'
+require_relative 'onesie/template_reader'
 require_relative 'onesie/version'
 
 module Onesie

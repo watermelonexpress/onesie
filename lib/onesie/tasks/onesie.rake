@@ -8,12 +8,23 @@ namespace :onesie do
 
   # bundle exec rake onesie:new['MyTask']
   # bundle exec rake onesie:new['MyTask','high']
+  # bundle exec rake onesie:new['MyTask','high','ExampleTemplateName']
+  # bundle exec rake onesie:new['MyTask',,'ExampleTemplateName']
   desc 'Generates a new Onesie Task'
-  task :new, [:name, :priority] do |_t, args|
+  task :new, [:name, :priority, :template] do |_t, args|
     name = args.fetch(:name)
     priority = args.fetch(:priority, nil)
+    task_template = args.fetch(:template, nil)
 
-    Rails::Generators.invoke('onesie:task', [name, priority])
+    Rails::Generators.invoke('onesie:task', [name, priority, task_template])
+  end
+
+  # bundle exec rake onesie:new_template['ExampleTemplateName']
+  desc 'Generates a new Onesie Template'
+  task :new_template, [:filename] do |_t, args|
+    filename = args.fetch(:filename)
+
+    Rails::Generators.invoke('onesie:template', [filename])
   end
 
   # bundle exec rake onesie:rerun
