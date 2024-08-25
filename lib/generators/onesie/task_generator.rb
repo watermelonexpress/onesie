@@ -25,7 +25,6 @@ module Onesie
       private
 
       def filename
-        binding.pry
         "#{Onesie::Manager.tasks_path}/#{task_version}_#{file_name}#{task_priority}.rb"
       end
 
@@ -34,19 +33,23 @@ module Onesie
       end
 
       def read_template
-        options.template ? Onesie::TemplateReader.read_template(custom_template_path) : nil
+        return unless custom_template
+
+        Onesie::TemplateReader.read_template(custom_template_path)
       end
 
       def custom_template_path
-        custom_template = (options.template || args[TEMPLATE_ARG]).underscore
-
-        Rails.root.join('onesie', 'templates', "#{custom_template}.rb")
+        Rails.root.join('onesie', 'templates', "#{custom_template.underscore}.rb")
       end
 
       def task_priority
-        return unless priority = options.priority || args[PRIORITY_ARG]
+        return unless (priority = options.priority || args[PRIORITY_ARG])
 
         ".#{priority}"
+      end
+
+      def custom_template
+        options.template || args[TEMPLATE_ARG]
       end
 
       def task_version

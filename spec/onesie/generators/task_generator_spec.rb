@@ -37,4 +37,13 @@ RSpec.describe Onesie::Generators::TaskGenerator, type: :generator do
       assert_migration 'onesie/tasks/test_task.rb', /# sample custom content/
     end
   end
+
+  context 'when template file does not exist' do
+    it 'gracefully reverts to default template' do
+      prepare_destination
+      run_generator
+
+      assert_migration 'onesie/tasks/test_task.rb', /# Write your Onesie Task here/
+    end
+  end
 end
