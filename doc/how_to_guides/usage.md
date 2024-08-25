@@ -16,10 +16,12 @@ be achieved with either the Rails generator or the Rake task
 #### API
 ```
 Usage:
-  rails generate onesie:task NAME PRIORITY [options]
+  rails generate onesie:task NAME [options]
 
 Options:
   [--skip-namespace], [--no-skip-namespace]  # Skip namespace (affects only isolated applications)
+  [--priority] # Specify a priority that the onesie should run as
+  [--template] # Specify a custom template for generating the onesie
 
 Runtime options:
   -f, [--force]                    # Overwrite files that already exist
@@ -31,8 +33,10 @@ Runtime options:
 
 #### Examples
 ```bash
-bundle exec rails generate onesie:task MyTask      # creates a normal priority task
-bundle exec rails generate onesie:task MyTask high # creates a high priority task
+bundle exec rails generate onesie:task MyTask                                           # creates a normal priority task
+bundle exec rails generate onesie:task MyTask --priority high                           # creates a high priority task
+bundle exec rails generate onesie:task MyTask --template SampleTemplate                 # creates a onesie using a custom template called SampleTemplate
+bundle exec rails generate onesie:task MyTask --priority high --template SampleTemplate # creates a onesie specifying both priority and the custom template
 ```
 
 ### Rake
