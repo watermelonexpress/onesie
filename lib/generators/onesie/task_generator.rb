@@ -9,6 +9,12 @@ module Onesie
       desc 'Generate a new Onesie Task'
       source_root File.expand_path('./templates', __dir__)
 
+      class_option :priority, type: :string, default: nil
+      PRIORITY_ARG = 0
+
+      class_option :template, type: :string, default: nil
+      TEMPLATE_ARG = 1
+
       TEMPLATE_FILENAME = 'task.rb'
       DEFAULT_TEMPLATE = '# Write your Onesie Task here'
 
@@ -19,6 +25,7 @@ module Onesie
       private
 
       def filename
+        binding.pry
         "#{Onesie::Manager.tasks_path}/#{task_version}_#{file_name}#{task_priority}.rb"
       end
 
@@ -27,29 +34,23 @@ module Onesie
       end
 
       def read_template
-        task_template ? Onesie::TemplateReader.read_template(custom_template_path) : nil
+        options.template ? Onesie::TemplateReader.read_template(custom_template_path) : nil
       end
 
       def custom_template_path
-        Rails.root.join('onesie', 'templates', "#{task_template.underscore}.rb")
+        custom_template = (options.template || args[TEMPLATE_ARG]).underscore
+
+        Rails.root.join('onesie', 'templates', "#{custom_template}.rb")
       end
 
       def task_priority
-        return unless priority
+        return unless priority = options.priority || args[PRIORITY_ARG]
 
         ".#{priority}"
       end
 
       def task_version
         Time.now.utc.strftime('%Y%m%d%H%M%S')
-      end
-
-      def priority
-        args[0]
-      end
-
-      def task_template
-        args[1]
       end
     end
   end
