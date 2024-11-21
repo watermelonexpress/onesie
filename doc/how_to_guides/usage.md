@@ -95,9 +95,9 @@ be rake onesie:run_all                       # Run all unprocessed tasks
 
 ```
 
-## Rerunning a task
-During the development process, it may be useful to rerun a task.
-Use the `onesie:rerun` rake task to:
+## Re-running a task
+During the development process, it may be useful to re-run a task.
+Use the `onesie:rerun` rake task without an argument to re-run the most recent task, or specify a filename to re-run a specific task.
 
 - Rerun the most recent task
 - Specify a task filename to rerun a specific task
