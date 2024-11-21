@@ -25,21 +25,9 @@ code from the past and adapting it for the needs of today.
 ## Usage
 
 ### Finding templates to use
-If you suspect that the onesie you're about to write is essentially
-something we've done before (possibly several times), it can be worth
-checking if there's a more specific template already available. As of
-this writing, there are templates for establishing new environment
-configuration variables, creating a new feature access, and creating a
-new permission. You can find all the latest templates in the v2 repo,
-at
-[onesie/templates](https://github.com/watermelonexpress/benchprep-v2/tree/release_candidate/onesie/templates).
+Writing a onesie for a common use-case? Check to see if a template already exists in [onesie/templates](https://github.com/watermelonexpress/benchprep-v2/tree/release_candidate/onesie/templates), and if not, consider creating one!
 
 ### Creating a new template
-If you don't find an existing template that suits your needs, but
-still have the feeling that you're not the first to do something (and
-that you won't be the last), we hope you'll consider contributing a
-new template so that the next developer can have an easier time of it.
-_The time you save could be your own!_
 
 Generating a new template is similar to generating a onesie, which you
 should be familiar with from reading about onesie [usage](/usage.md).
@@ -59,26 +47,15 @@ shell, and when you open your new file, you should see a single line:
 
 ```
 
-As that comment says, you will now write the functional elements of
-the onesie. What you write will ultimately be placed (and indented)
+What you write will ultimately be placed (and indented)
 into the `def run` block of any onesie generated using your template,
 so don't repeat that line or any of the other elements around it.
 
-At this point, you can write the onesie contents as you normally
-would, including simply pasting in the code from the last time we did
-this type of task. Keep in mind, however, that you have the
-opportunity to make things simpler and clearer for the next person. It
-can be especially helpful to spell out what variables are needed at
+It can be especially helpful to spell out what variables are needed at
 the top of the file and include comments that provide explanations
-and/or examples. Properly cased placeholders can help, but always be
-sure it's clear what the template's next user will need to
-populate/replace. Review existing templates to get a sense of best
-practices.
+and/or examples. Make sure it's clear what the template's next user will 
+need to populate/replace.
 
-That said, don't worry about it too much and don't let theoretical
-perfection impede practical, incremental improvements! Any template is
-better than none, and the future developers (including you) can
-improve it further later if it's created in some form now.
 
 ### Creating a onesie using a template file
 Once you've found or created a template, use a command such as those

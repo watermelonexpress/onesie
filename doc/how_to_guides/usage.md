@@ -43,12 +43,9 @@ The following commands should occur within a v2 shell
 containers, please consult our
 [container setup guide](../infrastructure/how_to_guides/dev_containers/setup_guide.md).
 
-You may notice that some of these examples include an optional
-template name as their last argument. These meta-templates are
-created by developers here at BenchPrep to further facilitate the
-creation of common types of onesies. For more information on finding,
-using, and contributing onesie templates, please refer to our
-[templates](/templates.md) documentation.
+There are a variety of existing onesie [templates](/templates.md) that may 
+make your job easier. If you're writing a onesie for a common use case, take 
+a look at existing templates, or consider writing your own template.
 
 #### API
 ```bash
