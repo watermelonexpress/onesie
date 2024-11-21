@@ -99,8 +99,8 @@ be rake onesie:run_all                       # Run all unprocessed tasks
 During the development process, it may be useful to re-run a task.
 Use the `onesie:rerun` rake task without an argument to re-run the most recent task, or specify a filename to re-run a specific task.
 
-- Rerun the most recent task
-- Specify a task filename to rerun a specific task
+!!! Note
+    As stated in the [onesie overview](../explanations/overview.md), a onesie should be _idempotent_—infinitely re-runnable without generating any errors or redundant data.
 
 ### Examples
 ```bash
