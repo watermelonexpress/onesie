@@ -8,7 +8,7 @@ created_at: 2024-11-21
 # Templates
 
 ## Overview
-As you should know from our documentation their [usage](/usage.md),
+As you should know from our documentation of their [usage](/usage.md),
 a onesie is already a sort of template. This guide will discuss the
 more specifically customized templates that allow us to define and
 easily re-use elements common among tasks of various generic types.
