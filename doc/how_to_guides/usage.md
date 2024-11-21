@@ -32,8 +32,8 @@ Runtime options:
 
 #### Examples
 ```bash
-bundle exec rails generate onesie:task MyTask      # creates a normal priority task
-bundle exec rails generate onesie:task MyTask high # creates a high priority task
+bundle exec rails generate onesie:task MyTask      # creates a normal priority Task
+bundle exec rails generate onesie:task MyTask high # creates a high priority Task
 
 ```
 
@@ -49,16 +49,16 @@ a look at existing templates, or consider writing your own template.
 
 #### API
 ```bash
-rake onesie:new[name,priority,template]         # Generates a new onesie task
+rake onesie:new[name,priority,template]         # Generates a new Onesie Task
 
 ```
 
 #### Examples
 
 ```bash
-bundle exec rake onesie:new['MyTask']                   # creates a normal priority task
-bundle exec rake onesie:new['MyTask','high']            # creates a high priority task
-bundle exec rake onesie:new['MyTask',,'SampleTemplate'] # creates a normal priority task using 'SampleTemplate'
+bundle exec rake onesie:new['MyTask']                   # creates a normal priority Task
+bundle exec rake onesie:new['MyTask','high']            # creates a high priority Task
+bundle exec rake onesie:new['MyTask',,'SampleTemplate'] # creates a normal priority Task using 'SampleTemplate'
 
 ```
 
@@ -74,8 +74,8 @@ For details about the Task class and the class macros, see the
 There are three Rake Tasks to assist with running Onesies:
 
 ```bash
-rake onesie:run[filename]              # Manually run a specific onesie task
-rake onesie:run_all                    # Run all unprocessed onesie tasks
+rake onesie:run[filename]              # Manually run a specific Onesie Task
+rake onesie:run_all                    # Run all unprocessed Onesie Tasks
 rake onesie:run_tasks[priority_level]  # Run all tasks by priority level
 
 ```
@@ -87,8 +87,8 @@ rake onesie:run_tasks[priority_level]  # Run all tasks by priority level
 
 ```bash
 be rake onesie:run['20220105140152_my_task'] # Run 20220105140152_my_task.rb
-be rake onesie:run_tasks['high']             # Run all high-priority tasks
-be rake onesie:run_all                       # Run all unprocessed tasks
+be rake onesie:run_tasks['high']             # Run all high-priority Tasks
+be rake onesie:run_all                       # Run all unprocessed Tasks
 
 ```
 
@@ -101,13 +101,13 @@ Use the `onesie:rerun` Rake Task without an argument to re-run the most recent T
 
 ### Examples
 ```bash
-bundle exec rake onesie:rerun                           # Re-runs the last task
+bundle exec rake onesie:rerun                           # Re-runs the last Task
 bundle exec rake onesie:rerun['20220105140152_my_task'] # Re-runs MyTask
 
 ```
 
 ## Describe
 ```bash
-rake onesie:describe # Prints a list of onesies available to run, and the commands one would use to run each
+rake onesie:describe # Prints a list of Onesies available to run, and the commands to run each
 
 ```
