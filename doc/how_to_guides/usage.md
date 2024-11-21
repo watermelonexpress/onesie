@@ -7,9 +7,10 @@ created_at: 2021-12-21
 
 # Usage
 
-## Generate Onesie template
-The first step to adding a onesie is to create a new template task. This can
-be achieved with either the Rails generator or the Rake task
+## Generate Onesie
+To create a new onesie for others to run, we ask that you use one of
+the following methods to generate the file (Rails generator or rake
+task) rather than creating the file yourself.
 
 ### Rails Generator
 
@@ -33,13 +34,26 @@ Runtime options:
 ```bash
 bundle exec rails generate onesie:task MyTask      # creates a normal priority task
 bundle exec rails generate onesie:task MyTask high # creates a high priority task
+
 ```
 
 ### Rake
+The following commands should occur within a v2 shell
+(`dcc shell benchprep-v2`). For more information on setting up
+containers, please consult our
+[container setup guide](../infrastructure/how_to_guides/dev_containers/setup_guide.md).
+
+You may notice that some of these examples include an optional
+template name as their last argument. These meta-templates are
+created by developers here at BenchPrep to further facilitate the
+creation of common types of onesies. For more information on finding,
+using, and contributing onesie templates, please refer to our
+[templates](/templates.md) documentation.
 
 #### API
 ```bash
-rake onesie:new[name,priority,template]         # Generates a new Onesie Task
+rake onesie:new[name,priority,template]         # Generates a new onesie task
+
 ```
 
 #### Examples
@@ -47,50 +61,56 @@ rake onesie:new[name,priority,template]         # Generates a new Onesie Task
 ```bash
 bundle exec rake onesie:new['MyTask']        # creates a normal priority task
 bundle exec rake onesie:new['MyTask','high'] # creates a high priority task
-bundle exec rake onesie:new['MyTask','high','SampleTemplate'] # creates a high priority task using 'SampleTemplate'
+bundle exec rake onesie:new['MyTask',,'SampleTemplate'] # creates a normal priority task using 'SampleTemplate'
+
 ```
 
-## Write your Onesie Task
-The generator will create a onesie template file. The task must include the
-`#run` method. Add your code to the new task file.
+## Write your onesie task
+The generator will create a onesie file for you to adjust and
+populate as needed. Your edits should occur mainly (if not
+exclusively) within the required `#run` method.
 
-For details about the Task class and the class macros, see the
+For details about the task class and the class macros, see the
 [Task](../explanations/task.md) document.
 
-## Run the Onesie Task
-There are three Rake tasks to assist with running onesies.
+## Run the onesie task
+There are three rake tasks to assist with running onesies.
 
 ```bash
-rake onesie:run[filename]              # Manually run a specific Onesie Tasks
-rake onesie:run_all                    # Run all unprocessed Onesie Tasks
+rake onesie:run[filename]              # Manually run a specific onesie task
+rake onesie:run_all                    # Run all unprocessed onesie tasks
 rake onesie:run_tasks[priority_level]  # Run all tasks by priority level
+
 ```
 
 !!! Note
-    Manual tasks must be ran individually with the `onesie:run` rake task.
+    Manual tasks must be run individually with the `onesie:run` rake task. Running `onesie:describe` will helpfully generate the command needed to run each file as part of its listing of unprocessed tasks.
 
 ### Examples
 
 ```bash
 be rake onesie:run['20220105140152_my_task'] # Run 20220105140152_my_task.rb
 be rake onesie:run_tasks['high']             # Run all high priority tasks
-be rake onesie:run_tasks                     # Run all tasks without priority
+be rake onesie:run_all                     # Run all unprocessed tasks
+
 ```
 
-## Rerunning a Task
-During the development process, it may be useful to rerun a Onesie Task.
+## Rerunning a task
+During the development process, it may be useful to rerun a task.
 Use the `onesie:rerun` rake task to:
 
-- Rerun the most recent Task
-- Specify a Task filename to rerun a specific Task
+- Rerun the most recent task
+- Specify a task filename to rerun a specific task
 
 ### Examples
 ```bash
 bundle exec rake onesie:rerun                           # Reruns the last task
 bundle exec rake onesie:rerun['20220105140152_my_task'] # Reruns MyTask
+
 ```
 
 ## Describe
 ```bash
-rake onesies:describe                  # Prints a list of available onesies to run
+rake onesie:describe                  # Prints a list of available onesies to run
+
 ```
