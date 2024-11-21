@@ -51,10 +51,9 @@ and/or examples. Make sure it's clear what the template's next user
 will need to populate/replace.
 
 ### Creating a Onesie Using a Template File
-Once you've found or created a template, use a command such as those
-seen in [Onesie usage](/usage.md). Building on our example above, the
-corresponding usage would be something like this:
+To use a Onesie template, include the template filename as the third argument to `onesie:new`.
 
+#### Example
 ```bash
 bundle exec rake onesie:new['DEV-1234-add-new-foo-permission',,'NewPermission']
 
