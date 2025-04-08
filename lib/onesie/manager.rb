@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+using Rainbow
+
 module Onesie
   # Responsible managing the Task files
   class Manager
@@ -13,6 +15,7 @@ module Onesie
 
     def initialize(runner: Onesie::Runner)
       @runner = runner
+      @disable_skip_task_message = false
     end
 
     def pending_tasks
@@ -24,6 +27,7 @@ module Onesie
     end
 
     def run_all
+      @disable_skip_task_message = true
       run_tasks(priority_level: Task::Priority::HIGH)
       run_tasks
     end
@@ -43,13 +47,23 @@ module Onesie
         version, name, priority = parse_task_filename(file)
         priority = nil if priority.empty?
 
-        TaskProxy.new(name.camelize, version, file, priority)
+        TaskProxy.new(
+          name.camelize, version, file,
+          priority, disable_skip_task_message: @disable_skip_task_message
+        )
       end
     end
 
     def rerun(filename: nil)
       task = filename ? find_task!(filename) : last_task
-      task.delete
+      begin
+        task.delete
+      rescue ActiveRecord::RecordNotFound
+        notifier_message = "[Onesie] WARN #{filename} raise a RecordNotFound " \
+                           '- running for the first time'
+        puts notifier_message.yellow
+        Onesie::Notifier.send_message(notifier_message) if defined?(Onesie::Notifier)
+      end
       runner.perform(task, manual_override: true)
     end
 
