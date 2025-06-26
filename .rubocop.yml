@@ -1,7 +1,9 @@
-require:
+require: rubocop-rspec
+
+plugins:
   - rubocop-performance
   - rubocop-rake
-  - rubocop-rspec
+  - rubocop-capybara
 
 AllCops:
   NewCops: enable
