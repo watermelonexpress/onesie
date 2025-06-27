@@ -2,10 +2,13 @@
 
 module Onesie
   # TaskProxy is a stand in for the actual Task until the class is needed
-  TaskProxy = Struct.new(:name, :version, :file_path, :priority) do
-    def initialize(name, version, file_path, priority)
+  TaskProxy = Struct.new(:name, :version, :file_path, :priority, :disable_skip_task_message) do
+    attr_accessor :disable_skip_task_message
+
+    def initialize(name, version, file_path, priority, disable_skip_task_message: false)
       super
       @task = nil
+      @disable_skip_task_message = disable_skip_task_message
     end
 
     delegate :delete, to: :task_record
@@ -34,7 +37,7 @@ module Onesie
       require(File.expand_path(file_path))
       klass = "Onesie::Tasks::#{name}".constantize
       klass.class_eval { prepend Onesie::TaskWrapper }
-      klass.new(name, version)
+      klass.new(name, version, disable_skip_task_message: disable_skip_task_message)
     end
   end
 end

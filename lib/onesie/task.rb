@@ -35,9 +35,10 @@ module Onesie
       define_method(:manual_task?) { enabled }
     end
 
-    def initialize(name = self.class.name, version = nil)
+    def initialize(name = self.class.name, version = nil, disable_skip_task_message: false)
       @name = name
       @version = version
+      @disable_skip_task_message = disable_skip_task_message
     end
 
     private
