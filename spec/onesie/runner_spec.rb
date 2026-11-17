@@ -48,7 +48,8 @@ RSpec.describe Onesie::Runner do
 
       before do
         allow(task).to receive(:run).and_call_original
-        allow_any_instance_of(task_class).to receive(:run).and_raise(StandardError, 'An error was raised')
+        allow_any_instance_of(task_class).to receive(:run).and_raise(StandardError,
+          'An error was raised')
       end
 
       it 'logs errors' do

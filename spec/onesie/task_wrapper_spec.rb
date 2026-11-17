@@ -12,7 +12,7 @@ RSpec.describe Onesie::TaskWrapper do
   let(:task) { task_class.new }
 
   before do
-    task_class.class_eval { prepend Onesie::TaskWrapper } # rubocop:disable RSpec/DescribedClass
+    task_class.class_eval { prepend Onesie::TaskWrapper }
   end
 
   describe '#run' do
@@ -44,7 +44,7 @@ RSpec.describe Onesie::TaskWrapper do
       end
 
       it 'does not run the task' do
-        klass.class_eval { prepend Onesie::TaskWrapper } # rubocop:disable RSpec/DescribedClass
+        klass.class_eval { prepend Onesie::TaskWrapper }
         klass.new.run
 
         expect(Onesie::TaskRecord).not_to have_received(:find_by)
@@ -112,12 +112,11 @@ RSpec.describe Onesie::TaskWrapper do
         expect(Onesie::TaskRecord).not_to have_received(:create!)
       end
 
-      it 'should have logged failure message' do
+      it 'has logged failure message' do
         expect(task).to receive(:log_failure_message).once
 
         expect { task.run }.to raise_error(StandardError)
       end
     end
-
   end
 end

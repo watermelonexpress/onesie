@@ -33,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fix documentation formatting for MKDocs
 - Fix calling `name` private method for `Task` class from Runner when errors exist
+- Fix rubocop linting after Ruby 3.1.7 upgrade
 
 ### Security
 

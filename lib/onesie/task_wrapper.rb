@@ -45,15 +45,15 @@ module Onesie
         super()
       rescue StandardError => e
         log_failure_message
-        error_message =<<~MSG
-        [#{self.class.module_parent}] #{self.class.name}
-        STARTED at #{@start_time} and
-        FAILED at #{@failure_time}
-        ---
-        ```
-        #{e.class} #{e.message}\n"
-        #{e.full_message.to_s.truncate(1000)}
-        ```
+        error_message = <<~MSG
+          [#{self.class.module_parent}] #{self.class.name}
+          STARTED at #{@start_time} and
+          FAILED at #{@failure_time}
+          ---
+          ```
+          #{e.class} #{e.message}\n"
+          #{e.full_message.to_s.truncate(1000)}
+          ```
         MSG
         Onesie::Notifier.send_message(error_message) if defined?(Onesie::Notifier)
         raise e
