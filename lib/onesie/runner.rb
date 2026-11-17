@@ -26,8 +26,8 @@ module Onesie
       tasks.each do |task|
         task.run(manual_override: manual_override)
       rescue StandardError => e
-        puts "An error occurred with #{task.name}".red
-        errors[task.name] = e
+        puts "An error occurred with #{task.class.name}".red
+        errors[task.class.name] = e
       end
 
       print_errors if errors.any?

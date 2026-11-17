@@ -98,5 +98,26 @@ RSpec.describe Onesie::TaskWrapper do
         expect(Onesie::TaskRecord).not_to have_received(:create!)
       end
     end
+
+    context 'when a onesie fails to run its task' do
+      before do
+        allow(task).to receive(:task_record_present?).and_return(false)
+        allow(Onesie::TaskRecord).to receive(:create!).and_return(true)
+        allow(task).to receive(:run).and_call_original
+        task_class.define_method(:run) { raise StandardError, 'An error was raised' }
+      end
+
+      it 'does not run the task' do
+        expect { task.run }.to raise_error(StandardError)
+        expect(Onesie::TaskRecord).not_to have_received(:create!)
+      end
+
+      it 'should have logged failure message' do
+        expect(task).to receive(:log_failure_message).once
+
+        expect { task.run }.to raise_error(StandardError)
+      end
+    end
+
   end
 end

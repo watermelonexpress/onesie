@@ -35,12 +35,27 @@ RSpec.describe Onesie::Runner do
       expect { runner.perform }.not_to raise_error
     end
 
-    it 'logs errors' do
-      allow(task).to receive(:run).and_raise(StandardError)
+    context 'when a task raises an error' do
+      let(:task_class) do
+        stub_const('TestErrorTask', Class.new(Onesie::Task) do
+          allowed_environments :development
+          manual_task enabled: false
 
-      expect {
-        runner.perform
-      }.to output(/The following Tasks contained errors/).to_stdout
+          def run; end
+        end)
+      end
+      let(:task) { task_class.new }
+
+      before do
+        allow(task).to receive(:run).and_call_original
+        allow_any_instance_of(task_class).to receive(:run).and_raise(StandardError, 'An error was raised')
+      end
+
+      it 'logs errors' do
+        expect {
+          runner.perform
+        }.to output(/The following Tasks contained errors/).to_stdout
+      end
     end
   end
 end

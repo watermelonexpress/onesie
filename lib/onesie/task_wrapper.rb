@@ -18,6 +18,11 @@ module Onesie
       puts "[Onesie] FINISHED #{self.class.name} at #{@end_time} (took #{duration.round(2)}s)".green
     end
 
+    def log_failure_message
+      @failure_time = Time.current
+      puts "[Onesie] FAILED #{self.class.name}} at #{@failure_time}"
+    end
+
     def duration
       @end_time - @start_time
     end
@@ -36,7 +41,23 @@ module Onesie
       return if manual_task? && !manual_override
 
       log_start_message
-      super()
+      begin
+        super()
+      rescue StandardError => e
+        log_failure_message
+        error_message =<<~MSG
+        [#{self.class.module_parent}] #{self.class.name}
+        STARTED at #{@start_time} and
+        FAILED at #{@failure_time}
+        ---
+        ```
+        #{e.class} #{e.message}\n"
+        #{e.full_message.to_s.truncate(1000)}
+        ```
+        MSG
+        Onesie::Notifier.send_message(error_message) if defined?(Onesie::Notifier)
+        raise e
+      end
       record_task
       log_end_message
       notifier_message = "[Onesie] #{self.class.name} STARTED at #{@start_time} and " \
