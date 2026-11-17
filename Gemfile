@@ -11,9 +11,9 @@ group :development, :test do
   gem 'guard-rubocop', '~> 1.5'
   gem 'rake', '~> 13.0'
   gem 'rspec', '~> 3.10'
-  gem 'rubocop', '~> 1.21'
-  gem 'rubocop-performance', '~> 1.11'
-  gem 'rubocop-rake', '~> 0.5'
-  gem 'rubocop-rspec', '~> 2.5'
+  gem 'rubocop', '~> 1.65'
+  gem 'rubocop-performance', '~> 1.21'
+  gem 'rubocop-rake', '~> 0.6'
+  gem 'rubocop-rspec', '~> 3.0'
   gem 'sqlite3', '~> 1.3'
 end
