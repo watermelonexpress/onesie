@@ -113,9 +113,10 @@ RSpec.describe Onesie::TaskWrapper do
       end
 
       it 'has logged failure message' do
-        expect(task).to receive(:log_failure_message).once
+        allow(task).to receive(:log_failure_message)
 
         expect { task.run }.to raise_error(StandardError)
+        expect(task).to have_received(:log_failure_message).once
       end
     end
   end

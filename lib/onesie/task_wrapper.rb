@@ -35,7 +35,7 @@ module Onesie
       Onesie::Notifier.send_message(notifier_message) if defined?(Onesie::Notifier)
     end
 
-    def run(manual_override: false)
+    def run(manual_override: false) # rubocop:disable Metrics/MethodLength
       return unless allowed_environment?
       return show_skipped_message if task_record_present?
       return if manual_task? && !manual_override
@@ -45,24 +45,38 @@ module Onesie
         super()
       rescue StandardError => e
         log_failure_message
-        error_message = <<~MSG
-          [#{self.class.module_parent}] #{self.class.name}
-          STARTED at #{@start_time} and
-          FAILED at #{@failure_time}
-          ---
-          ```
-          #{e.class} #{e.message}\n"
-          #{e.full_message.to_s.truncate(1000)}
-          ```
-        MSG
-        Onesie::Notifier.send_message(error_message) if defined?(Onesie::Notifier)
+        notify_failure(e)
         raise e
       end
       record_task
       log_end_message
+      notify_success
+    end
+
+    private
+
+    def notify_failure(error)
+      return unless defined?(Onesie::Notifier)
+
+      error_message = <<~MSG
+        [#{self.class.module_parent}] #{self.class.name}
+        STARTED at #{@start_time} and
+        FAILED at #{@failure_time}
+        ---
+        ```
+        #{error.class} #{error.message}\n"
+        #{error.full_message.to_s.truncate(1000)}
+        ```
+      MSG
+      Onesie::Notifier.send_message(error_message)
+    end
+
+    def notify_success
+      return unless defined?(Onesie::Notifier)
+
       notifier_message = "[Onesie] #{self.class.name} STARTED at #{@start_time} and " \
                          "FINISHED at #{@end_time} (took #{duration.round(2)}s)"
-      Onesie::Notifier.send_message(notifier_message) if defined?(Onesie::Notifier)
+      Onesie::Notifier.send_message(notifier_message)
     end
   end
 end

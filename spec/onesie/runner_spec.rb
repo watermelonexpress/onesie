@@ -41,16 +41,12 @@ RSpec.describe Onesie::Runner do
           allowed_environments :development
           manual_task enabled: false
 
-          def run; end
+          def run
+            raise StandardError, 'An error was raised'
+          end
         end)
       end
       let(:task) { task_class.new }
-
-      before do
-        allow(task).to receive(:run).and_call_original
-        allow_any_instance_of(task_class).to receive(:run).and_raise(StandardError,
-          'An error was raised')
-      end
 
       it 'logs errors' do
         expect {
