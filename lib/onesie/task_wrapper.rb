@@ -59,7 +59,7 @@ module Onesie
       return unless defined?(Onesie::Notifier)
 
       error_message = <<~MSG
-        [#{self.class.module_parent}] #{self.class.name}
+        [Onesie] :alert_slow: #{self.class.name} has failed
         STARTED at #{@start_time} and
         FAILED at #{@failure_time}
         ---

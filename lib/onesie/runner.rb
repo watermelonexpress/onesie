@@ -26,14 +26,21 @@ module Onesie
       tasks.each do |task|
         task.run(manual_override: manual_override)
       rescue StandardError => e
-        puts "An error occurred with #{task.class.name}".red
-        errors[task.class.name] = e
+        name = task_name(task)
+        puts "An error occurred with #{name}".red
+        errors[name] = e
       end
 
       print_errors if errors.any?
     end
 
     private
+
+    # TaskProxy exposes the real task's name publicly; fall back to the class
+    # name for objects that do not respond to #name
+    def task_name(task)
+      task.respond_to?(:name) ? task.name : task.class.name
+    end
 
     def print_errors
       puts "The following Tasks contained errors\n\n".red
