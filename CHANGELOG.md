@@ -12,11 +12,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added `.DS_Store` to `.gitignore`
 - Added support for Rails > 5
 - Added support for custom templates
+- Added failure log
+- Added specs for validating logging failure message
 
 ### Changed
 
 - Switch `colorize` gem for `rainbow`
-- Upgrade project to Ruby 3.0.6
+- Upgrade project to Ruby 3.1.7
 
 ### Deprecated
 
@@ -30,6 +32,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Fix documentation formatting for MKDocs
+- Fix calling `name` private method for `Task` class from Runner when errors exist
+- Fix rubocop linting after Ruby 3.1.7 upgrade
 
 ### Security
 

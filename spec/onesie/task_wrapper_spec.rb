@@ -12,7 +12,7 @@ RSpec.describe Onesie::TaskWrapper do
   let(:task) { task_class.new }
 
   before do
-    task_class.class_eval { prepend Onesie::TaskWrapper } # rubocop:disable RSpec/DescribedClass
+    task_class.class_eval { prepend Onesie::TaskWrapper }
   end
 
   describe '#run' do
@@ -44,7 +44,7 @@ RSpec.describe Onesie::TaskWrapper do
       end
 
       it 'does not run the task' do
-        klass.class_eval { prepend Onesie::TaskWrapper } # rubocop:disable RSpec/DescribedClass
+        klass.class_eval { prepend Onesie::TaskWrapper }
         klass.new.run
 
         expect(Onesie::TaskRecord).not_to have_received(:find_by)
@@ -96,6 +96,27 @@ RSpec.describe Onesie::TaskWrapper do
         task.run
 
         expect(Onesie::TaskRecord).not_to have_received(:create!)
+      end
+    end
+
+    context 'when a onesie fails to run its task' do
+      before do
+        allow(task).to receive(:task_record_present?).and_return(false)
+        allow(Onesie::TaskRecord).to receive(:create!).and_return(true)
+        allow(task).to receive(:run).and_call_original
+        task_class.define_method(:run) { raise StandardError, 'An error was raised' }
+      end
+
+      it 'does not run the task' do
+        expect { task.run }.to raise_error(StandardError)
+        expect(Onesie::TaskRecord).not_to have_received(:create!)
+      end
+
+      it 'has logged failure message' do
+        allow(task).to receive(:log_failure_message)
+
+        expect { task.run }.to raise_error(StandardError)
+        expect(task).to have_received(:log_failure_message).once
       end
     end
   end

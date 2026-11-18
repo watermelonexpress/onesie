@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 module Onesie
-  OnesieError = Class.new(StandardError)
+  class OnesieError < StandardError
+  end
 
   # Raised when there is no matching Task for the provided Task filename.
   class TaskNotFoundError < OnesieError

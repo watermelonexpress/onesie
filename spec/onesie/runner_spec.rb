@@ -35,12 +35,27 @@ RSpec.describe Onesie::Runner do
       expect { runner.perform }.not_to raise_error
     end
 
-    it 'logs errors' do
-      allow(task).to receive(:run).and_raise(StandardError)
+    context 'when tasks raise errors' do
+      let(:other_task) do
+        instance_double(Onesie::TaskProxy, name: 'OtherTask', version: '20211123000000')
+      end
+      let(:tasks) { [task, other_task] }
 
-      expect {
-        runner.perform
-      }.to output(/The following Tasks contained errors/).to_stdout
+      before do
+        allow(task).to receive(:run).and_raise(StandardError, 'An error was raised')
+        allow(other_task).to receive(:run).and_raise(StandardError, 'Another error')
+      end
+
+      it 'logs errors' do
+        expect {
+          runner.perform
+        }.to output(/The following Tasks contained errors/).to_stdout
+      end
+
+      it 'records each error under its task name' do
+        expect { runner.perform }.to output(/TaskyMcTaskFace.*OtherTask/m).to_stdout
+        expect(runner.errors.keys).to contain_exactly('TaskyMcTaskFace', 'OtherTask')
+      end
     end
   end
 end
